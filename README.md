@@ -1,17 +1,22 @@
-# Movie Database Application
+# Multi-User Movie Database
 
-A Python application for managing a movie collection with:
-- SQLite database storage
+A Python application for managing personal movie collections with:
+
+- User accounts and authentication
 - OMDB API integration
-- Command-line interface
-- Website generation
+- SQLite database storage
+- Personalized website generation
 
 ## Features
-- Add movies using OMDB API
+
+- Create multiple user accounts
+- Each user has their own movie collection
+- Add movies using OMDB API (just enter title)
 - View statistics and ratings
-- Generate a static website
+- Generate personalized websites
 
 ## Setup
-1. Install requirements: `pip install sqlalchemy requests matplotlib jinja2`
-2. Get an OMDB API key
-3. Run: `python movies.py`
+
+1. Install requirements:
+   ```bash
+   pip install sqlalchemy requests matplotlib jinja2
