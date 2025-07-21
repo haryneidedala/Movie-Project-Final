@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>My Movie Collection</h1>
+    <p>Generated on {{ generated_at }}</p>
+    
+    <div class="movies">
+        {% for title, data in movies %}
+        <div class="movie">
+            <h2>{{ title }} ({{ data.year }})</h2>
+            <p>Rating: {{ "%.1f"|format(data.rating) }}</p>
+            {% if data.poster_url %}
+            <img src="{{ data.poster_url }}" alt="{{ title }} poster">
+            {% endif %}
+            {% if data.plot %}
+            <p>{{ data.plot }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
