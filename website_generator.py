@@ -1,28 +1,33 @@
 from jinja2 import Environment, FileSystemLoader
-from database import list_movies
 import os
 from datetime import datetime
 
-def generate_website():
-    """Generate static website with movie data"""
+def generate_user_website(user_id, username):
+    """Generate personalized website for a user"""
     try:
-        os.makedirs("website", exist_ok=True)
+        from database import list_movies
+        
+        os.makedirs("websites", exist_ok=True)
         
         env = Environment(loader=FileSystemLoader('templates'))
-        template = env.get_template('index.html')
+        template = env.get_template('user_index.html')
         
         movies = sorted(
-            list_movies().items(),
-            key=lambda x: x[1]['rating'],
+            list_movies(user_id),
+            key=lambda x: x['rating'],
             reverse=True
         )
         
-        with open("website/index.html", "w") as f:
+        filename = f"websites/{username}_movies.html"
+        with open(filename, "w") as f:
             f.write(template.render(
+                username=username,
                 movies=movies,
                 generated_at=datetime.now().strftime("%Y-%m-%d %H:%M")
             ))
         
-        print("Successfully generated website in 'website' directory")
+        print(f"\nSuccessfully generated website: {filename}")
+        return True
     except Exception as e:
-        print(f"Error generating website: {str(e)}")
+        print(f"\nError generating website: {str(e)}")
+        return False
